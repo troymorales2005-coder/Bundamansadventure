@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+data/
+logs/
+artifacts/
+*.db
+*.sqlite*
+__pycache__/
+.venv/
+node_modules/
+pip_install.txt
+pytest_result.txt
+test_output.txt
+test_python_info.txt
+test_version.txt

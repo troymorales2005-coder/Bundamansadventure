@@ -1,0 +1,13 @@
+{
+  "source_id": "S01",
+  "title": "User-uploaded professional-trader transcript",
+  "original_filename": "Pasted text.txt",
+  "original_referenced_path": "/mnt/data/Pasted text.txt",
+  "conversation_id": "6abd9188-0bc8-83e9-8a38-db3e36887a7d",
+  "video_url": "https://youtu.be/LvnemCfJpQU",
+  "local_path": "sources/professional_trader_transcript.txt",
+  "recovered_on": "2026-10-01",
+  "sha256": "0fb127bac65e059bf8cc779d76bf41790e30fb4b5ef1d7c2d1309522a0685a52",
+  "provenance": "Exact byte copy of attachment exported by read_thread; no source edits",
+  "verification_scope": "Transcript read; video visuals, reported performance and current vendor capabilities not independently verified"
+}
