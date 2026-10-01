@@ -1,0 +1,431 @@
+{
+  "ambiguous_count": 3,
+  "cases": [
+    {
+      "actual_posts": [
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [
+            "base:0x1111111111111111111111111111111111111111"
+          ],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_CONTRACT_REFERENCE",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "direct_contract_reference_count": 1,
+        "underlying_subject_mention_count": 0
+      },
+      "id": "01-direct-contract",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_TICKER_OR_NAME_REFERENCE",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "specific_token_mention_count": 0,
+        "ticker_name_reference_count": 1
+      },
+      "id": "02-direct-ticker",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "AMBIGUOUS_RELATION",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "specific_token_mention_count": 0
+      },
+      "id": "03-ticker-collision",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "ORIGINAL_CATALYST",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": true,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey",
+            "zara"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "specific_token_mention_count": 0,
+        "underlying_subject_mention_count": 1
+      },
+      "id": "04-external-no-coin",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "ORIGINAL_CATALYST",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": true,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey"
+          ]
+        },
+        {
+          "classification": "ORIGINAL_CATALYST",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": true,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "independent_source_count": null,
+        "total_relevant_posts": 2,
+        "unique_author_count": 2
+      },
+      "id": "05-early-distinct-accounts",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "ORIGINAL_CATALYST",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": true,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "underlying_subject_mention_count": 1
+      },
+      "id": "06-late-receipt",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "PROMOTION_OR_SHILL",
+          "direct_coin_ids": [
+            "base:0x1111111111111111111111111111111111111111"
+          ],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_CONTRACT_REFERENCE",
+          "subjects": [
+            "viral-monkey"
+          ]
+        },
+        {
+          "classification": "PROMOTION_OR_SHILL",
+          "direct_coin_ids": [
+            "base:0x1111111111111111111111111111111111111111"
+          ],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_CONTRACT_REFERENCE",
+          "subjects": [
+            "viral-monkey"
+          ]
+        },
+        {
+          "classification": "PROMOTION_OR_SHILL",
+          "direct_coin_ids": [
+            "base:0x1111111111111111111111111111111111111111"
+          ],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_CONTRACT_REFERENCE",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "duplicate_content_count": 1,
+        "duplicate_content_ratio": 0.3333333333333333,
+        "repeated_contract_promotion_count": 2,
+        "unique_author_count": 3
+      },
+      "id": "07-duplicate-promotion",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [
+            "base:0x1111111111111111111111111111111111111111"
+          ],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_CONTRACT_REFERENCE",
+          "subjects": [
+            "viral-monkey"
+          ]
+        },
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [
+            "base:0x2222222222222222222222222222222222222222"
+          ],
+          "possible_external_catalyst": false,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "competing_contract_count": 1,
+        "specific_token_mention_count": 1,
+        "underlying_subject_mention_count": 2
+      },
+      "id": "08-competing-contracts",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "UNKNOWN",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "UNRELATED",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "total_relevant_posts": 0
+      },
+      "id": "09-irrelevant",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "NARRATIVE_PROPAGATION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": true,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "repost_count": 1
+      },
+      "id": "10-repost",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "REACTION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": true,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "quote_count": 1
+      },
+      "id": "11-quote",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "REACTION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": true,
+          "relationship": "INDIRECT_NARRATIVE_RELATION",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "reply_count": 1
+      },
+      "id": "12-reply",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "UNKNOWN",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "AMBIGUOUS_RELATION",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "total_relevant_posts": 0
+      },
+      "id": "13-missing-fields",
+      "matched": true
+    },
+    {
+      "error_type": "ValueError",
+      "expected_rejection": true,
+      "id": "14-future-leakage",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "AMBIGUOUS_RELATION",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "specific_token_mention_count": 0,
+        "underlying_subject_mention_count": 0
+      },
+      "id": "15-false-association",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "NEWS_OR_INFORMATION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_TICKER_OR_NAME_REFERENCE",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "specific_token_mention_count": 0
+      },
+      "id": "16-token-name",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "UNKNOWN",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "UNRELATED",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {},
+      "id": "17-unregistered-subject",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [
+            "base:0x1111111111111111111111111111111111111111"
+          ],
+          "possible_external_catalyst": false,
+          "relationship": "DIRECT_CONTRACT_REFERENCE",
+          "subjects": [
+            "viral-monkey"
+          ]
+        }
+      ],
+      "checked_facts": {
+        "specific_token_mention_count": 1
+      },
+      "id": "18-negative-association",
+      "matched": true
+    },
+    {
+      "actual_posts": [
+        {
+          "classification": "TRADER_OR_CALLER_MENTION",
+          "direct_coin_ids": [],
+          "possible_external_catalyst": false,
+          "relationship": "UNRELATED",
+          "subjects": []
+        }
+      ],
+      "checked_facts": {
+        "specific_token_mention_count": 0
+      },
+      "id": "19-unresolved-address",
+      "matched": true
+    }
+  ],
+  "data_mode": "synthetic",
+  "dataset_version": "ct-x-replay/v1",
+  "exact_match_accuracy": 1.0,
+  "exact_match_cases": 19,
+  "false_negative_count": 0,
+  "false_positive_count": 0,
+  "fixture_coverage": 1.0,
+  "identity_accuracy": 1.0,
+  "identity_precision": 1.0,
+  "identity_recall": 1.0,
+  "limitation": "Small synthetic rule-conformance dataset, not real-X performance or trading evidence",
+  "relationship_metrics": {
+    "AMBIGUOUS_RELATION": {
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 3
+    },
+    "DIRECT_CONTRACT_REFERENCE": {
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 6
+    },
+    "DIRECT_TICKER_OR_NAME_REFERENCE": {
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 2
+    },
+    "INDIRECT_NARRATIVE_RELATION": {
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 8
+    },
+    "UNRELATED": {
+      "fn": 0,
+      "fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 3
+    }
+  },
+  "total_cases": 19,
+  "true_negative_count": 16,
+  "true_positive_count": 6,
+  "unexpected_parsing_errors": 0,
+  "unknown_count": 3,
+  "unsupported_inference_count": 0
+}

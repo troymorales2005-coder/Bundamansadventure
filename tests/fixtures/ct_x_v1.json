@@ -1,0 +1,855 @@
+{
+  "version": "ct-x-replay/v1",
+  "data_mode": "synthetic",
+  "subject": "viral-monkey",
+  "target": {
+    "chain": "base",
+    "contract_address": "0x1111111111111111111111111111111111111111"
+  },
+  "registry": {
+    "known_at": "2026-10-01T09:00:00Z",
+    "version": "synthetic-registry/v1",
+    "subjects": [
+      {
+        "subject": "viral-monkey",
+        "kind": "meme",
+        "aliases": [
+          "viral monkey",
+          "dancing monkey"
+        ]
+      },
+      {
+        "subject": "zara",
+        "kind": "person",
+        "aliases": [
+          "Zara"
+        ]
+      }
+    ],
+    "tokens": [
+      {
+        "coin": {
+          "chain": "base",
+          "contract_address": "0x1111111111111111111111111111111111111111"
+        },
+        "subjects": [
+          "viral-monkey"
+        ],
+        "tickers": [
+          "MON",
+          "SOLO"
+        ],
+        "names": [
+          "Monkey Alpha"
+        ]
+      },
+      {
+        "coin": {
+          "chain": "base",
+          "contract_address": "0x2222222222222222222222222222222222222222"
+        },
+        "subjects": [
+          "viral-monkey"
+        ],
+        "tickers": [
+          "MON"
+        ],
+        "names": [
+          "Monkey Beta"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "01-direct-contract",
+      "description": "Exact registered contract; no subject fabricated",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "101",
+                "text": "0x1111111111111111111111111111111111111111",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "DIRECT_CONTRACT_REFERENCE",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": [
+              "base:0x1111111111111111111111111111111111111111"
+            ]
+          }
+        ],
+        "facts": {
+          "direct_contract_reference_count": 1,
+          "underlying_subject_mention_count": 0
+        }
+      }
+    },
+    {
+      "id": "02-direct-ticker",
+      "description": "Unique ticker alias is not exact contract identity",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "102",
+                "text": "$SOLO",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "DIRECT_TICKER_OR_NAME_REFERENCE",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "specific_token_mention_count": 0,
+          "ticker_name_reference_count": 1
+        }
+      }
+    },
+    {
+      "id": "03-ticker-collision",
+      "description": "MON identifies two registered contracts",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "103",
+                "text": "$MON",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "AMBIGUOUS_RELATION",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "specific_token_mention_count": 0
+        }
+      }
+    },
+    {
+      "id": "04-external-no-coin",
+      "description": "Person/phrase catalyst with no token mention",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "104",
+                "text": "Zara introduces dancing monkey",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "ORIGINAL_CATALYST",
+            "subjects": [
+              "viral-monkey",
+              "zara"
+            ],
+            "possible_external_catalyst": true,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "underlying_subject_mention_count": 1,
+          "specific_token_mention_count": 0
+        }
+      }
+    },
+    {
+      "id": "05-early-distinct-accounts",
+      "description": "Two known author IDs, independence remains unknown",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "105",
+                "text": "viral monkey dancing",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "early-a"
+              },
+              {
+                "id": "106",
+                "text": "dancing monkey everywhere",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "early-b"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "ORIGINAL_CATALYST",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": true,
+            "direct_coin_ids": []
+          },
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "ORIGINAL_CATALYST",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": true,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "unique_author_count": 2,
+          "independent_source_count": null,
+          "total_relevant_posts": 2
+        }
+      }
+    },
+    {
+      "id": "06-late-receipt",
+      "description": "Old subject post first received much later; no chasing judgement",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "107",
+                "text": "viral monkey returns",
+                "created_at": "2026-10-01T10:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:10:00Z",
+          "parsed_at": "2026-10-01T12:10:02Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "ORIGINAL_CATALYST",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": true,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "underlying_subject_mention_count": 1
+        }
+      }
+    },
+    {
+      "id": "07-duplicate-promotion",
+      "description": "Duplicate promotional texts, no bot assertion",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "108",
+                "text": "viral monkey buy now 0x1111111111111111111111111111111111111111",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "promo-a"
+              },
+              {
+                "id": "109",
+                "text": "viral monkey buy now 0x1111111111111111111111111111111111111111",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "promo-b"
+              },
+              {
+                "id": "110",
+                "text": "100x 0x1111111111111111111111111111111111111111 dancing monkey",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "promo-c"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "DIRECT_CONTRACT_REFERENCE",
+            "classification": "PROMOTION_OR_SHILL",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": [
+              "base:0x1111111111111111111111111111111111111111"
+            ]
+          },
+          {
+            "relationship": "DIRECT_CONTRACT_REFERENCE",
+            "classification": "PROMOTION_OR_SHILL",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": [
+              "base:0x1111111111111111111111111111111111111111"
+            ]
+          },
+          {
+            "relationship": "DIRECT_CONTRACT_REFERENCE",
+            "classification": "PROMOTION_OR_SHILL",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": [
+              "base:0x1111111111111111111111111111111111111111"
+            ]
+          }
+        ],
+        "facts": {
+          "duplicate_content_count": 1,
+          "duplicate_content_ratio": 0.3333333333333333,
+          "repeated_contract_promotion_count": 2,
+          "unique_author_count": 3
+        }
+      }
+    },
+    {
+      "id": "08-competing-contracts",
+      "description": "One subject, two distinct contracts, no winner",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "111",
+                "text": "viral monkey 0x1111111111111111111111111111111111111111",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              },
+              {
+                "id": "112",
+                "text": "viral monkey 0x2222222222222222222222222222222222222222",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-2"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "DIRECT_CONTRACT_REFERENCE",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": [
+              "base:0x1111111111111111111111111111111111111111"
+            ]
+          },
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": [
+              "base:0x2222222222222222222222222222222222222222"
+            ]
+          }
+        ],
+        "facts": {
+          "competing_contract_count": 1,
+          "underlying_subject_mention_count": 2,
+          "specific_token_mention_count": 1
+        }
+      }
+    },
+    {
+      "id": "09-irrelevant",
+      "description": "Unrelated discussion",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "113",
+                "text": "Preparing dinner and barbecue",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "UNRELATED",
+            "classification": "UNKNOWN",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "total_relevant_posts": 0
+        }
+      }
+    },
+    {
+      "id": "10-repost",
+      "description": "API reference establishes repost behavior",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "114",
+                "text": "viral monkey",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1",
+                "referenced_tweets": [
+                  {
+                    "type": "retweeted",
+                    "id": "900"
+                  }
+                ]
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "NARRATIVE_PROPAGATION",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": true,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "repost_count": 1
+        }
+      }
+    },
+    {
+      "id": "11-quote",
+      "description": "API reference establishes quote behavior",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "115",
+                "text": "viral monkey news",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1",
+                "referenced_tweets": [
+                  {
+                    "type": "quoted",
+                    "id": "900"
+                  }
+                ]
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "REACTION",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": true,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "quote_count": 1
+        }
+      }
+    },
+    {
+      "id": "12-reply",
+      "description": "API reference establishes reply behavior",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "116",
+                "text": "viral monkey",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1",
+                "referenced_tweets": [
+                  {
+                    "type": "replied_to",
+                    "id": "900"
+                  }
+                ]
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "INDIRECT_NARRATIVE_RELATION",
+            "classification": "REACTION",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": true,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "reply_count": 1
+        }
+      }
+    },
+    {
+      "id": "13-missing-fields",
+      "description": "Missing time/author/text retained without guesses",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "117"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "AMBIGUOUS_RELATION",
+            "classification": "UNKNOWN",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "total_relevant_posts": 0
+        }
+      }
+    },
+    {
+      "id": "14-future-leakage",
+      "description": "Future creation/detection/parsing must reject entire analysis",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "118",
+                "text": "viral monkey 0x1111111111111111111111111111111111111111",
+                "created_at": "2026-10-01T12:30:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:31:00Z",
+          "parsed_at": "2026-10-01T12:31:01Z"
+        }
+      ],
+      "expected": {
+        "error_contains": "Future evidence"
+      }
+    },
+    {
+      "id": "15-false-association",
+      "description": "Ticker collision in stock chatter does not establish capture",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "119",
+                "text": "$MON company stock discussion",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "AMBIGUOUS_RELATION",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "specific_token_mention_count": 0,
+          "underlying_subject_mention_count": 0
+        }
+      }
+    },
+    {
+      "id": "16-token-name",
+      "description": "Name alias cannot prove contract",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "120",
+                "text": "Monkey Alpha launches news",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "DIRECT_TICKER_OR_NAME_REFERENCE",
+            "classification": "NEWS_OR_INFORMATION",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "specific_token_mention_count": 0
+        }
+      }
+    },
+    {
+      "id": "17-unregistered-subject",
+      "description": "Unregistered new phrase remains unknown, text retained",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "121",
+                "text": "Never-seen flutter noodle",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "UNRELATED",
+            "classification": "UNKNOWN",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {}
+      }
+    },
+    {
+      "id": "18-negative-association",
+      "description": "Negated subject/contract cooccurrence is not capture",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "122",
+                "text": "viral monkey is NOT associated with 0x1111111111111111111111111111111111111111",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "DIRECT_CONTRACT_REFERENCE",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [
+              "viral-monkey"
+            ],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": [
+              "base:0x1111111111111111111111111111111111111111"
+            ]
+          }
+        ],
+        "facts": {
+          "specific_token_mention_count": 1
+        }
+      }
+    },
+    {
+      "id": "19-unresolved-address",
+      "description": "Unregistered EVM address is a candidate without guessed chain",
+      "window_start": "2026-10-01T11:00:00Z",
+      "observed_at": "2026-10-01T12:15:00Z",
+      "observations": [
+        {
+          "response": {
+            "data": [
+              {
+                "id": "123",
+                "text": "0x9999999999999999999999999999999999999999",
+                "created_at": "2026-10-01T12:00:00Z",
+                "author_id": "account-1"
+              }
+            ]
+          },
+          "detected_at": "2026-10-01T12:01:00Z",
+          "parsed_at": "2026-10-01T12:01:01Z"
+        }
+      ],
+      "expected": {
+        "posts": [
+          {
+            "relationship": "UNRELATED",
+            "classification": "TRADER_OR_CALLER_MENTION",
+            "subjects": [],
+            "possible_external_catalyst": false,
+            "direct_coin_ids": []
+          }
+        ],
+        "facts": {
+          "specific_token_mention_count": 0
+        }
+      }
+    }
+  ]
+}
